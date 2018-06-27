@@ -3,6 +3,7 @@ package dialog
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/jroimartin/gocui"
 )
@@ -40,6 +41,10 @@ func GenerateParamsLayout(params map[string]string, command string) {
 	g.Highlight = true
 	g.Cursor = true
 	g.SelFgColor = gocui.ColorGreen
+
+	if os.Getenv("NCURSES_NO_UTF8_ACS") == "0" {
+		g.ASCII = true
+	}
 
 	g.SetManagerFunc(layout)
 
